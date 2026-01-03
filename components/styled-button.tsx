@@ -16,13 +16,18 @@ const StyledButton: React.FC<StyledButtonProps> = ({
     icon, 
     size,
     variant = 'primary',
+    disabled,
     ...props 
 }) => {
     return (
-        <TouchableOpacity style={[styles.base, 
+        <TouchableOpacity style={[styles.base,
+            disabled ? styles.disabled : null,
             size === 'small' ? styles.small : null,
             variant === 'secondary' ? styles.secondary : null
-        ]} {...props}>
+        ]} 
+            {...props}
+            disabled={disabled}    
+        >
             {label && <StyledText>{label}</StyledText>}
             {icon && <Ionicons name={icon} size={14} color={Colors.dark.iconBg} />}
         </TouchableOpacity>
@@ -39,7 +44,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#007bff',},
+        borderColor: '#007bff',
+    },
+    disabled: {
+        opacity: 0.5,
+    },
     small: {
         paddingVertical: 10,
         paddingHorizontal: 10

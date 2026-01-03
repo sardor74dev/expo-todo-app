@@ -4,6 +4,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import Header from './layout/Header';
 import { Todo } from '@/types/todo';
 import TodoList from './layout/TodoList';
+import TodoCreator from './layout/TodoCreator';
 
 const defaultTodos: Todo[] = [
   {
@@ -26,11 +27,16 @@ const defaultTodos: Todo[] = [
 export default function HomeScreen() {
     const [todos, setTodos] = useState<Todo[]>(defaultTodos);
 
+    const addTodo = (title: Todo["title"]) => {
+      setTodos([...todos, { id: todos.length + 1, title, isCompleted: false }])
+    }
+
     const completedTodos = todos.filter((todo) => todo.isCompleted)
     
     return (
         <View style={styles.container}>
             <Header totalTodos={todos.length} completedTodos={completedTodos.length} />
+            <TodoCreator onAddTodo={addTodo} />
             <TodoList todos={todos} />
         </View>
     ); 

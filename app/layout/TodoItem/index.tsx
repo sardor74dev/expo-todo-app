@@ -1,6 +1,7 @@
 import StyledText from "@/components/styled-text";
 import { View, StyleSheet } from "react-native";
 import StyledButton from "@/components/styled-button";
+import StyledCheckbox from "@/components/checkbox";
 
 type TodoItemProps = {
     title: string;
@@ -10,6 +11,7 @@ type TodoItemProps = {
 const TodoItem: React.FC<TodoItemProps> = ({ title, isCompleted }) => {
     return (
         <View style={styles.container}>
+            <StyledCheckbox checked={isCompleted} onCheck={() => {}} />
             <StyledText
                 style={[
                     { textDecorationLine: isCompleted ? 'line-through' : 'none' }
