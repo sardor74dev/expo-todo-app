@@ -5,6 +5,7 @@ import StyledCheckbox from "@/components/checkbox";
 import { Todo } from "@/types/todo";
 import { useState } from "react";
 import EditTodoModal from "../Modals/EditTodoModal";
+import DeleteTodoModal from "../Modals/DeleteTodoModal";
 
 type TodoItemProps = Todo & {
     onCheck: (id: Todo["id"]) => void;
@@ -13,15 +14,20 @@ type TodoItemProps = Todo & {
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ id, title, isCompleted, onCheck, onDelete, onUpdateTitle }) => {
-    const [isEditModalOpen, setIsEditModalOpen] = useState(true);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
    
     const onPressCheck = () => {
         onCheck(id);
     };
 
     const onPressDelete = () => {
-        onDelete(id);
-    };
+        setIsDeleteModalOpen(true);
+    }
+
+    // const onPressDelete = () => {
+    //     onDelete(id);
+    // };
 
     return (
         <View style={styles.container}>
@@ -35,6 +41,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, title, isCompleted, onCheck, on
                 <StyledButton icon="pencil" size="small" onPress={() => setIsEditModalOpen(true)} />
                 <EditTodoModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} onUpdate={(newTitle) => onUpdateTitle(id, newTitle)} title={title} />
                 <StyledButton icon="trash" size="small" variant="secondary" onPress={onPressDelete} />
+                <DeleteTodoModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onDelete={() => { onDelete(id); setIsDeleteModalOpen(false); }} />
             </View>
         </View>
     )
