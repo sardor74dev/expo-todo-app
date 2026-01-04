@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import StyledButton from "@/components/styled-button";
 import StyledCheckbox from "@/components/checkbox";
 import { Todo } from "@/types/todo";
+import { useState } from "react";
+import EditTodoModal from "../Modals/EditTodoModal";
 
 type TodoItemProps = Todo & {
     onCheck: (id: Todo["id"]) => void;
@@ -11,6 +13,8 @@ type TodoItemProps = Todo & {
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ id, title, isCompleted, onCheck, onDelete, onUpdateTitle }) => {
+    const [isEditModalOpen, setIsEditModalOpen] = useState(true);
+   
     const onPressCheck = () => {
         onCheck(id);
     };
@@ -28,7 +32,8 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, title, isCompleted, onCheck, on
                 ]}
             >{title}</StyledText>
             <View style={styles.controlsContainer}>
-                <StyledButton icon="pencil" size="small" />
+                <StyledButton icon="pencil" size="small" onPress={() => setIsEditModalOpen(true)} />
+                <EditTodoModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} onUpdate={(newTitle) => onUpdateTitle(id, newTitle)} title={title} />
                 <StyledButton icon="trash" size="small" variant="secondary" onPress={onPressDelete} />
             </View>
         </View>
