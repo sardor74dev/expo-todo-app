@@ -1,6 +1,6 @@
 import { Todo } from "@/types/todo";
+import { FlatList, View } from "react-native";
 import TodoItem from "../TodoItem";
-import { FlatList, View, Text   } from "react-native";
 
 type TodoListProps = {
     todos: Todo[];

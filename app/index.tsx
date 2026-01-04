@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { Colors } from '@/constants/theme';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import Header from './layout/Header';
 import { Todo } from '@/types/todo';
-import TodoList from './layout/TodoList';
-import TodoCreator from './layout/TodoCreator';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Header from '../layout/Header';
+import TodoCreator from '../layout/TodoCreator';
+import TodoList from '../layout/TodoList';
 
 const defaultTodos: Todo[] = [
   {
