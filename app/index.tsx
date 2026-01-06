@@ -1,6 +1,6 @@
 import { Colors } from '@/constants/theme';
 import { Todo } from '@/types/todo';
-import { useState } from 'react';
+import useTodo from '@/hooks/use-todo';
 import { StyleSheet, View } from 'react-native';
 import Header from '../layout/Header';
 import TodoCreator from '../layout/TodoCreator';
@@ -25,25 +25,14 @@ const defaultTodos: Todo[] = [
 ];
 
 export default function HomeScreen() {
-    const [todos, setTodos] = useState<Todo[]>(defaultTodos);
-
-    const onAddTodo = (title: Todo["title"]) => {
-      setTodos([...todos, { id: todos.length + 1, title, isCompleted: false }])
-    };
-
-    const onDeleteTodo = (id: Todo["id"]) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    };
-
-    const onCheckTodo = (id: Todo["id"]) => {
-      setTodos(todos.map((todo) => (todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo )));
-    };
-
-    const onUpdateTodoTitle = (id: Todo["id"], title: Todo["title"]) => {
-      setTodos(todos.map((todo) => todo.id === id ? { ...todo, title } : todo ));
-    }
-
-    const completedTodos = todos.filter((todo) => todo.isCompleted)
+    const {
+      todos,
+      completedTodos,
+      onAddTodo,
+      onDeleteTodo,
+      onCheckTodo,
+      onUpdateTodoTitle
+    } = useTodo();
     
     return (
         <View style={styles.container}>

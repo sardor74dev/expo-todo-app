@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import StyledText from "@/components/styled-text";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { formatDate } from "@/helpers/date";
 
 type HeaderProps = {
     totalTodos: number;
@@ -8,11 +9,12 @@ type HeaderProps = {
 }
 
 const Header: React.FC<HeaderProps> = ({ totalTodos, completedTodos }) => {
+    const date = formatDate(new Date());
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerMainContent}>
                 <StyledText>Todo app</StyledText>
-                <StyledText>December 29, 2025</StyledText>
+                <StyledText>{date}</StyledText>
             </View>
             <StyledText>Completed: {completedTodos}/{totalTodos}</StyledText>
         </SafeAreaView>
