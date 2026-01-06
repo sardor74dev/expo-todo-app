@@ -45,7 +45,7 @@ const EditTodoModal: React.FC<EditTodoModalProps> = ({ isOpen, onClose, onUpdate
                     />
                 </View>
                 <View style={styles.buttonsContainer}>
-                    <StyledButton label="Cancel" onPress={onClose}></StyledButton>
+                    <StyledButton label="Cancel" variant="secondary" onPress={onClose}></StyledButton>
                     <StyledButton label="Update" onPress={(onPressSave)} disabled={inputError}></StyledButton>
                 </View>
             </View>

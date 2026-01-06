@@ -25,18 +25,18 @@ const TodoItem: React.FC<TodoItemProps> = ({ id, title, isCompleted, onCheck, on
         setIsDeleteModalOpen(true);
     }
 
-    // const onPressDelete = () => {
-    //     onDelete(id);
-    // };
-
     return (
         <View style={styles.container}>
-            <StyledCheckbox checked={isCompleted} onCheck={onPressCheck} />
-            <StyledText
-                style={[
-                    { textDecorationLine: isCompleted ? 'line-through' : 'none' }
-                ]}
-            >{title}</StyledText>
+            <View style={styles.checkboxContainer}>
+                <StyledCheckbox checked={isCompleted} onCheck={onPressCheck} />
+            </View>
+            <View style={styles.textContainer}>
+                <StyledText
+                    style={[
+                        { textDecorationLine: isCompleted ? 'line-through' : 'none' }
+                    ]}
+                >{title}</StyledText>
+            </View>
             <View style={styles.controlsContainer}>
                 <StyledButton icon="pencil" size="small" onPress={() => setIsEditModalOpen(true)} />
                 <EditTodoModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} onUpdate={(newTitle) => onUpdateTitle(id, newTitle)} title={title} />
@@ -54,7 +54,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 15,
         marginVertical: 8,
-        backgroundColor: '#727272ff'
+        backgroundColor: '#727272ff',
+        borderRadius: 10
+    },
+    checkboxContainer: {
+        justifyContent: 'center'
+    },
+    textContainer: {
+        justifyContent: 'center',
     },
     controlsContainer: {
         flexDirection: 'row',

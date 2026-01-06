@@ -17,7 +17,7 @@ const DeleteTodoModal: React.FC<DeleteTodoModalProps> = ({ isOpen, onClose, onDe
                 <StyledText>Delete todo</StyledText>
             </View>
             <View style={styles.buttonsContainer}>
-                <StyledButton label="Cancel" onPress={onClose}></StyledButton>
+                <StyledButton label="Cancel" variant="secondary" onPress={onClose}></StyledButton>
                 <StyledButton label="Delete" onPress={onDelete}></StyledButton>
             </View>
         </StyledModal>
